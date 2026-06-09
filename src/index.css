@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+JP:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter',
+    /* System fonts for broad Unicode support */
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans',
+    /* CJK (Japanese, Korean, Chinese) */
+    'Noto Sans JP', 'Noto Sans KR', 'Noto Sans SC',
+    'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic', 'Meiryo', 'MS PGothic',
+    /* Emoji and symbols */
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
+    sans-serif;
+  background-color: #f8f6ff;
+  color: #0F172A;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Safety-net CSS transition — GSAP will override with its own timing */
+  transition: background-color 0.6s ease;
+}
+
+/* Swiper overrides */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 0.875rem !important;
+  color: #64748b !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  width: 36px !important;
+  height: 36px !important;
+  background: rgba(255,255,255,0.8) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #fff !important;
+}
+.swiper-pagination-bullet {
+  background: rgba(0,0,0,0.2) !important;
+  width: 6px !important;
+  height: 6px !important;
+}
+.swiper-pagination-bullet-active {
+  background: #0F172A !important;
+  width: 20px !important;
+  border-radius: 3px !important;
+  transition: width 0.3s !important;
+}
