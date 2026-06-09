@@ -234,10 +234,11 @@ function Bubble({ admin, tierDef, onClick }) {
       <div style={{
         width: `${tierDef.size}px`, height: `${tierDef.size}px`, borderRadius: '50%',
         border: `${isRoot ? 4 : 3}px solid ${tierDef.color}`,
-        boxShadow: `0 0 ${Math.round(tierDef.size * 0.3)}px ${tierDef.color}65, 0 ${Math.round(tierDef.size * 0.08)}px ${Math.round(tierDef.size * 0.2)}px rgba(0,0,0,0.18)`,
+        boxShadow: `0 4px 12px rgba(0,0,0,0.12)`,
         background: `linear-gradient(135deg,${tierDef.color}20,${tierDef.color}50)`,
         overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
         position: 'relative',
+        transform: 'translateZ(0)',
       }}>
         {!err && admin.avatar_url
           ? <img src={admin.avatar_url} referrerPolicy="no-referrer" onError={() => setErr(true)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={name} />
@@ -246,12 +247,13 @@ function Bubble({ admin, tierDef, onClick }) {
 
       {/* Username */}
       <div style={{
-        background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(6px)',
+        background: 'rgba(255,255,255,0.98)',
         color: '#0f172a', padding: '0.18rem 0.55rem', borderRadius: '999px',
         fontSize: `${isRoot ? 0.68 : 0.6}rem`, fontWeight: 700, fontFamily: FONT,
         border: `1px solid ${tierDef.color}25`,
-        boxShadow: `0 2px 8px rgba(0,0,0,0.08)`,
+        boxShadow: `0 2px 4px rgba(0,0,0,0.06)`,
         whiteSpace: 'nowrap', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis',
+        transform: 'translateZ(0)',
       }}>
         {name}
       </div>
@@ -476,16 +478,13 @@ function TreeCanvas({ admins, onNodeClick }) {
 
           <style>{`
             @keyframes flowDash { to { stroke-dashoffset: -36; } }
+            @media (max-width: 768px) {
+              .mobile-static-dash { animation: none !important; }
+            }
           `}</style>
 
           {/* SVG edges — ALL connected, smooth bezier curves */}
           <svg width={canvasW} height={canvasH} style={{ position: 'absolute', inset: 0, overflow: 'visible', pointerEvents: 'none' }}>
-            <defs>
-              <filter id="lg" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
 
             {edges.map((e, i) => {
               // S-curve bezier: from bottom of parent to top of child
@@ -510,6 +509,7 @@ function TreeCanvas({ admins, onNodeClick }) {
                   {/* Animated energy dash on top */}
                   <path d={d} fill="none" stroke="#fff" strokeWidth="2" strokeOpacity="0.55" strokeLinecap="round"
                     strokeDasharray="8 24"
+                    className="mobile-static-dash"
                     style={{ animation: `flowDash ${animDur} linear infinite` }}
                   />
                 </g>
